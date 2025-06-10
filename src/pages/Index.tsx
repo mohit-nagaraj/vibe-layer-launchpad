@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
+
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Github, Download, Eye, EyeOff, Palette, Settings, Layers, Sparkles, Heart, Users } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Separator } from "@/components/ui/separator";
+import { Star, GitFork, Download, Sparkles, Eye, Settings, Palette, Shield } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+  const [email, setEmail] = useState('');
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -19,18 +20,18 @@ const Index = () => {
   const [githubStats, setGithubStats] = useState({
     stars: 0,
     forks: 0,
-    downloads: 0
+    downloads: 0,
+    loading: true
   });
-  const [isLoading, setIsLoading] = useState(true);
 
-  // Countdown timer to June 18, 2025 6 PM IST
+  // Countdown to June 18, 2025 6 PM IST
   useEffect(() => {
     const targetDate = new Date('2025-06-18T18:00:00+05:30').getTime();
-    
+
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const difference = targetDate - now;
-      
+
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -44,336 +45,282 @@ const Index = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Simulate fetching GitHub stats with loader
+  // Fetch GitHub stats (simulated for now)
   useEffect(() => {
-    setTimeout(() => {
-      setGithubStats({
-        stars: 342,
-        forks: 28,
-        downloads: 0
-      });
-      setIsLoading(false);
-    }, 2000);
+    const fetchGithubStats = async () => {
+      // Simulate loading
+      setTimeout(() => {
+        setGithubStats({
+          stars: 247,
+          forks: 52,
+          downloads: 0, // Coming soon
+          loading: false
+        });
+      }, 2000);
+    };
+
+    fetchGithubStats();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleWaitlistSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    
-    setIsSubmitted(true);
-    toast({
-      title: "Welcome to the waitlist! ✨",
-      description: "We'll notify you when Vibelayer is ready for launch!",
-    });
+    if (email) {
+      toast({
+        title: "Welcome to the waitlist! 🎉",
+        description: "We'll notify you when Vibelayer launches!"
+      });
+      setEmail('');
+    }
   };
 
-  const features = [
-    {
-      icon: <Layers className="w-6 h-6" />,
-      title: "Transparent Stickers",
-      description: "Display beautiful stickers in transparent windows that float on your desktop"
-    },
-    {
-      icon: <Palette className="w-6 h-6" />,
-      title: "Background Remover",
-      description: "Built-in AI background removal to create perfect stickers from any image"
-    },
-    {
-      icon: <Settings className="w-6 h-6" />,
-      title: "Full Customization",
-      description: "Light/dark themes, always on top, auto-launch, and much more"
-    },
-    {
-      icon: <Eye className="w-6 h-6" />,
-      title: "Screen Capture Control",
-      description: "Hide or show stickers during screen recording and capturing"
-    }
-  ];
+  const LoadingDots = () => (
+    <div className="flex space-x-1">
+      <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+    </div>
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-      {/* Fixed floating elements on sides */}
-      <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-30 space-y-8">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={`left-${i}`}
-            className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-40 animate-pulse"
-            style={{
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: `${2 + i * 0.2}s`
-            }}
-          />
-        ))}
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-x-hidden">
+      {/* Floating Elements */}
+      <div className="fixed left-4 top-1/4 z-10 animate-float">
+        <div className="w-16 h-16 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full opacity-60 blur-sm"></div>
+      </div>
+      <div className="fixed left-8 top-1/2 z-10 animate-float" style={{ animationDelay: '1s' }}>
+        <div className="w-12 h-12 bg-gradient-to-r from-blue-300 to-purple-300 rounded-full opacity-50 blur-sm"></div>
+      </div>
+      <div className="fixed left-2 top-3/4 z-10 animate-float" style={{ animationDelay: '2s' }}>
+        <div className="w-20 h-20 bg-gradient-to-r from-pink-300 to-yellow-300 rounded-full opacity-40 blur-sm"></div>
       </div>
 
-      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-30 space-y-8">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={`right-${i}`}
-            className="w-4 h-4 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full opacity-40 animate-pulse"
-            style={{
-              animationDelay: `${i * 0.4}s`,
-              animationDuration: `${2.5 + i * 0.2}s`
-            }}
-          />
-        ))}
+      <div className="fixed right-4 top-1/3 z-10 animate-float" style={{ animationDelay: '0.5s' }}>
+        <div className="w-14 h-14 bg-gradient-to-r from-green-300 to-blue-300 rounded-full opacity-60 blur-sm"></div>
+      </div>
+      <div className="fixed right-8 top-1/2 z-10 animate-float" style={{ animationDelay: '1.5s' }}>
+        <div className="w-18 h-18 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full opacity-50 blur-sm"></div>
+      </div>
+      <div className="fixed right-2 top-2/3 z-10 animate-float" style={{ animationDelay: '2.5s' }}>
+        <div className="w-16 h-16 bg-gradient-to-r from-yellow-300 to-red-300 rounded-full opacity-40 blur-sm"></div>
       </div>
 
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-48 h-48 bg-purple-200/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/3 w-56 h-56 bg-pink-200/30 rounded-full blur-3xl animate-pulse delay-2000"></div>
-      </div>
-
-      {/* Floating particles - fixed to float smoothly */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-60`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${3 + Math.random() * 2}s ease-in-out infinite`,
-              animationDelay: `${i * 0.5}s`
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 py-12">
-        {/* Header */}
-        <header className="text-center mb-16 animate-fade-in">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-purple-500 animate-pulse" />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Vibelayer
+      {/* Hero Section */}
+      <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative z-20">
+        <div className="space-y-8 max-w-4xl mx-auto">
+          <div className="space-y-4">
+            <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
+              VibeLayer
             </h1>
-            <Sparkles className="w-8 h-8 text-blue-500 animate-pulse" />
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              Your magical desktop companion that brings stickers to life on your screen ✨
+            </p>
           </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
-            Your adorable desktop companion that brings life to your screen with beautiful transparent stickers ✨
-          </p>
-          <div className="relative inline-block">
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 rounded-full blur-lg opacity-75 animate-pulse"></div>
-            <Badge className="relative bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 px-6 py-3 text-lg font-semibold shadow-lg">
-              Coming Soon
-            </Badge>
-          </div>
-        </header>
-
-        {/* Direct Countdown Section - No Card */}
-        <div className="max-w-6xl mx-auto mb-20 animate-fade-in text-center">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-8">
-            Launch Countdown
-          </h2>
-          <p className="text-gray-600 text-lg mb-12">June 18, 2025 • 6:00 PM IST</p>
           
-          <div className="flex items-center justify-center gap-4 md:gap-8">
-            {/* Days */}
-            <div className="text-center">
-              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
-                {timeLeft.days.toString().padStart(2, '0')}
-              </div>
-              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
-                Days
-              </div>
-            </div>
-
-            {/* Colon */}
-            <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent">
-              :
-            </div>
-
-            {/* Hours */}
-            <div className="text-center">
-              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
-                {timeLeft.hours.toString().padStart(2, '0')}
-              </div>
-              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
-                Hours
-              </div>
-            </div>
-
-            {/* Colon */}
-            <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent">
-              :
-            </div>
-
-            {/* Minutes */}
-            <div className="text-center">
-              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
-                {timeLeft.minutes.toString().padStart(2, '0')}
-              </div>
-              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
-                Minutes
-              </div>
-            </div>
-
-            {/* Colon */}
-            <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent">
-              :
-            </div>
-
-            {/* Seconds */}
-            <div className="text-center">
-              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
-                {timeLeft.seconds.toString().padStart(2, '0')}
-              </div>
-              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
-                Seconds
-              </div>
-            </div>
+          <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <Button
+              size="lg"
+              className="px-8 py-6 text-lg bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white border-0 shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse"
+            >
+              <Sparkles className="mr-2" />
+              Coming Soon
+            </Button>
           </div>
         </div>
+      </section>
 
-        {/* GitHub Stats with Loader */}
-        <div className="flex justify-center mb-16 animate-fade-in">
-          <div className="flex gap-4 flex-wrap justify-center">
-            {isLoading ? (
-              <>
-                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
-                  <CardContent className="p-4 flex items-center gap-2">
-                    <Skeleton className="w-5 h-5 rounded-full" />
-                    <Skeleton className="w-8 h-4" />
-                    <Skeleton className="w-12 h-4" />
-                  </CardContent>
-                </Card>
-                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
-                  <CardContent className="p-4 flex items-center gap-2">
-                    <Skeleton className="w-5 h-5 rounded-full" />
-                    <Skeleton className="w-8 h-4" />
-                    <Skeleton className="w-12 h-4" />
-                  </CardContent>
-                </Card>
-                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
-                  <CardContent className="p-4 flex items-center gap-2">
-                    <Skeleton className="w-5 h-5 rounded-full" />
-                    <Skeleton className="w-8 h-4" />
-                    <Skeleton className="w-16 h-4" />
-                  </CardContent>
-                </Card>
-              </>
-            ) : (
-              <>
-                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  <CardContent className="p-4 flex items-center gap-2">
-                    <Star className="w-5 h-5 text-yellow-500" />
-                    <span className="font-semibold">{githubStats.stars}</span>
-                    <span className="text-gray-600">Stars</span>
-                  </CardContent>
-                </Card>
-                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  <CardContent className="p-4 flex items-center gap-2">
-                    <Github className="w-5 h-5 text-gray-700" />
-                    <span className="font-semibold">{githubStats.forks}</span>
-                    <span className="text-gray-600">Forks</span>
-                  </CardContent>
-                </Card>
-                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  <CardContent className="p-4 flex items-center gap-2">
-                    <Download className="w-5 h-5 text-green-500" />
-                    <span className="font-semibold">{githubStats.downloads}</span>
-                    <span className="text-gray-600">Downloads</span>
-                  </CardContent>
-                </Card>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Waitlist Form */}
-        <div className="max-w-md mx-auto mb-20 animate-fade-in">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-2xl">
-            <CardContent className="p-8">
-              <div className="text-center mb-6">
-                <Heart className="w-12 h-12 text-pink-500 mx-auto mb-4 animate-pulse" />
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">Join the Waitlist</h2>
-                <p className="text-gray-600">Be the first to bring magic to your desktop!</p>
-              </div>
-
-              {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="border-2 border-purple-200 focus:border-purple-400 rounded-lg h-12"
-                    required
-                  />
-                  <Button 
-                    type="submit" 
-                    className="w-full h-12 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
-                  >
-                    <Users className="w-5 h-5 mr-2" />
-                    Join Waitlist
-                  </Button>
-                </form>
-              ) : (
-                <div className="text-center animate-scale-in">
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Heart className="w-8 h-8 text-white animate-pulse" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">You're in! ✨</h3>
-                  <p className="text-gray-600">We'll notify you when Vibelayer is ready!</p>
+      {/* Countdown & GitHub Stats Section */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-4 relative z-20">
+        <div className="space-y-16 max-w-6xl mx-auto">
+          {/* Launch Countdown */}
+          <div className="text-center space-y-8">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Launch Countdown
+            </h2>
+            
+            <div className="flex items-center justify-center space-x-8 text-center">
+              <div className="flex flex-col items-center">
+                <div className="text-6xl md:text-8xl font-bold text-purple-600">
+                  {timeLeft.days.toString().padStart(2, '0')}
                 </div>
-              )}
+                <div className="text-sm md:text-lg text-muted-foreground font-medium">DAYS</div>
+              </div>
+              
+              <div className="text-6xl md:text-8xl font-bold text-purple-600">:</div>
+              
+              <div className="flex flex-col items-center">
+                <div className="text-6xl md:text-8xl font-bold text-pink-600">
+                  {timeLeft.hours.toString().padStart(2, '0')}
+                </div>
+                <div className="text-sm md:text-lg text-muted-foreground font-medium">HOURS</div>
+              </div>
+              
+              <div className="text-6xl md:text-8xl font-bold text-pink-600">:</div>
+              
+              <div className="flex flex-col items-center">
+                <div className="text-6xl md:text-8xl font-bold text-blue-600">
+                  {timeLeft.minutes.toString().padStart(2, '0')}
+                </div>
+                <div className="text-sm md:text-lg text-muted-foreground font-medium">MINUTES</div>
+              </div>
+              
+              <div className="text-6xl md:text-8xl font-bold text-blue-600">:</div>
+              
+              <div className="flex flex-col items-center">
+                <div className="text-6xl md:text-8xl font-bold text-purple-600">
+                  {timeLeft.seconds.toString().padStart(2, '0')}
+                </div>
+                <div className="text-sm md:text-lg text-muted-foreground font-medium">SECONDS</div>
+              </div>
+            </div>
+          </div>
+
+          {/* GitHub Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="text-center bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <CardContent className="pt-6">
+                <div className="flex items-center justify-center space-x-2 mb-2">
+                  <Star className="w-8 h-8 text-yellow-500" />
+                  <span className="text-3xl font-bold text-purple-600">
+                    {githubStats.loading ? <LoadingDots /> : githubStats.stars}
+                  </span>
+                </div>
+                <p className="text-muted-foreground font-medium">GitHub Stars</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <CardContent className="pt-6">
+                <div className="flex items-center justify-center space-x-2 mb-2">
+                  <GitFork className="w-8 h-8 text-blue-500" />
+                  <span className="text-3xl font-bold text-purple-600">
+                    {githubStats.loading ? <LoadingDots /> : githubStats.forks}
+                  </span>
+                </div>
+                <p className="text-muted-foreground font-medium">Forks</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <CardContent className="pt-6">
+                <div className="flex items-center justify-center space-x-2 mb-2">
+                  <Download className="w-8 h-8 text-green-500" />
+                  <span className="text-3xl font-bold text-purple-600">
+                    {githubStats.loading ? <LoadingDots /> : "Coming Soon"}
+                  </span>
+                </div>
+                <p className="text-muted-foreground font-medium">Downloads</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Waitlist & Features Section */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-4 relative z-20">
+        <div className="space-y-16 max-w-6xl mx-auto">
+          {/* Waitlist Signup */}
+          <Card className="max-w-md mx-auto bg-white/90 backdrop-blur-sm border-purple-200 shadow-xl">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Join the Waitlist
+              </CardTitle>
+              <CardDescription>
+                Be the first to experience the magic when we launch!
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleWaitlistSignup} className="space-y-4">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border-purple-200 focus:border-purple-400"
+                  required
+                />
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Join Waitlist
+                </Button>
+              </form>
             </CardContent>
           </Card>
-        </div>
 
-        {/* Features Section */}
-        <div className="max-w-4xl mx-auto animate-fade-in">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-              Features That'll Make You Smile
+          {/* Features Grid */}
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Magical Features
             </h2>
-            <p className="text-gray-600">Everything you need to personalize your desktop experience</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {features.map((feature, index) => (
-              <Card 
-                key={index} 
-                className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-3 rounded-lg group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                      {feature.icon}
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto">
+                      <Sparkles className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-800 mb-2">{feature.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
-                    </div>
+                    <h3 className="font-semibold text-purple-700">Transparent Stickers</h3>
+                    <p className="text-sm text-muted-foreground">Place animated stickers anywhere on your screen with full transparency</p>
                   </div>
                 </CardContent>
               </Card>
-            ))}
+
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto">
+                      <Eye className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-semibold text-purple-700">AI Background Removal</h3>
+                    <p className="text-sm text-muted-foreground">Built-in AI removes backgrounds from your images automatically</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto">
+                      <Settings className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-semibold text-purple-700">Advanced Controls</h3>
+                    <p className="text-sm text-muted-foreground">Always on top, auto-launch, and screen capture protection</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-yellow-500 rounded-full flex items-center justify-center mx-auto">
+                      <Palette className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-semibold text-purple-700">Theme Support</h3>
+                    <p className="text-sm text-muted-foreground">Dark and light themes to match your desktop aesthetic</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Footer */}
-        <footer className="text-center mt-20 animate-fade-in">
-          <div className="flex items-center justify-center gap-2 text-gray-500">
-            <span>Built with</span>
-            <Heart className="w-4 h-4 text-pink-500 animate-pulse" />
-            <span>for the community</span>
-          </div>
-          <p className="text-sm text-gray-400 mt-2">Open source and always will be ✨</p>
-        </footer>
-      </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          25% { transform: translateY(-10px) translateX(5px); }
-          50% { transform: translateY(-5px) translateX(-5px); }
-          75% { transform: translateY(-15px) translateX(3px); }
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+          }
+          
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+        `
+      }} />
     </div>
   );
 };
