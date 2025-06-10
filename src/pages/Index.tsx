@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Github, Download, Eye, EyeOff, Palette, Settings, Layers, Sparkles, Heart, Users, Clock } from "lucide-react";
+import { Star, Github, Download, Eye, EyeOff, Palette, Settings, Layers, Sparkles, Heart, Users } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -127,17 +126,17 @@ const Index = () => {
         <div className="absolute bottom-20 left-1/3 w-56 h-56 bg-pink-200/30 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
-      {/* Floating particles */}
+      {/* Floating particles - fixed to float smoothly */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className={`absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-60 animate-bounce`}
+            className={`absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-60`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
+              animation: `float ${3 + Math.random() * 2}s ease-in-out infinite`,
+              animationDelay: `${i * 0.5}s`
             }}
           />
         ))}
@@ -156,44 +155,77 @@ const Index = () => {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
             Your adorable desktop companion that brings life to your screen with beautiful transparent stickers ✨
           </p>
-          <Badge variant="outline" className="bg-gradient-to-r from-orange-100 to-red-100 text-orange-700 border-orange-200 px-4 py-2 text-lg">
-            Coming Soon
-          </Badge>
+          <div className="relative inline-block">
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 rounded-full blur-lg opacity-75 animate-pulse"></div>
+            <Badge className="relative bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 px-6 py-3 text-lg font-semibold shadow-lg">
+              Coming Soon
+            </Badge>
+          </div>
         </header>
 
-        {/* Countdown Hero Section */}
-        <div className="max-w-4xl mx-auto mb-20 animate-fade-in">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-2xl">
-            <CardContent className="p-12">
-              <div className="text-center mb-8">
-                <Clock className="w-16 h-16 text-purple-500 mx-auto mb-4 animate-pulse" />
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-                  Launch Countdown
-                </h2>
-                <p className="text-gray-600 text-lg">June 18, 2025 • 6:00 PM IST</p>
+        {/* Direct Countdown Section - No Card */}
+        <div className="max-w-6xl mx-auto mb-20 animate-fade-in text-center">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-8">
+            Launch Countdown
+          </h2>
+          <p className="text-gray-600 text-lg mb-12">June 18, 2025 • 6:00 PM IST</p>
+          
+          <div className="flex items-center justify-center gap-4 md:gap-8">
+            {/* Days */}
+            <div className="text-center">
+              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
+                {timeLeft.days.toString().padStart(2, '0')}
               </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {[
-                  { label: "Days", value: timeLeft.days },
-                  { label: "Hours", value: timeLeft.hours },
-                  { label: "Minutes", value: timeLeft.minutes },
-                  { label: "Seconds", value: timeLeft.seconds }
-                ].map((item, index) => (
-                  <div key={item.label} className="text-center">
-                    <div className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-2xl p-6 mb-2 shadow-lg transform hover:scale-105 transition-all duration-300">
-                      <div className="text-4xl md:text-5xl font-bold font-mono">
-                        {item.value.toString().padStart(2, '0')}
-                      </div>
-                    </div>
-                    <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider">
-                      {item.label}
-                    </div>
-                  </div>
-                ))}
+              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
+                Days
               </div>
-            </CardContent>
-          </Card>
+            </div>
+
+            {/* Colon */}
+            <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              :
+            </div>
+
+            {/* Hours */}
+            <div className="text-center">
+              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
+                {timeLeft.hours.toString().padStart(2, '0')}
+              </div>
+              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
+                Hours
+              </div>
+            </div>
+
+            {/* Colon */}
+            <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              :
+            </div>
+
+            {/* Minutes */}
+            <div className="text-center">
+              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
+                {timeLeft.minutes.toString().padStart(2, '0')}
+              </div>
+              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
+                Minutes
+              </div>
+            </div>
+
+            {/* Colon */}
+            <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              :
+            </div>
+
+            {/* Seconds */}
+            <div className="text-center">
+              <div className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono">
+                {timeLeft.seconds.toString().padStart(2, '0')}
+              </div>
+              <div className="text-gray-600 font-semibold uppercase text-sm tracking-wider mt-2">
+                Seconds
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* GitHub Stats with Loader */}
@@ -333,6 +365,15 @@ const Index = () => {
           <p className="text-sm text-gray-400 mt-2">Open source and always will be ✨</p>
         </footer>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) translateX(0px); }
+          25% { transform: translateY(-10px) translateX(5px); }
+          50% { transform: translateY(-5px) translateX(-5px); }
+          75% { transform: translateY(-15px) translateX(3px); }
+        }
+      `}</style>
     </div>
   );
 };
