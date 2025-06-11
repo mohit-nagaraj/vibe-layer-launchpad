@@ -140,104 +140,88 @@ const Index = () => {
             <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
               VibeLayer
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              Your magical desktop companion that brings stickers to life on your screen ✨
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in-delayed">
+              Your adorable desktop companion with transparent stickers
+            </p>
+            <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto animate-fade-in-delayed-2">
+              Transform your desktop with customizable stickers, GIFs, and companions that float alongside your work
             </p>
           </div>
           
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <Button
-              size="lg"
-              className="px-8 py-6 text-lg bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white border-0 shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse"
-            >
-              <Sparkles className="mr-2" />
-              Coming Soon
-            </Button>
+            <Button size="lg" className="px-12 py-6 text-xl font-semibold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 animate-glow">
+            Coming Soon
+            
+          </Button>
           </div>
         </div>
       </section>
 
       {/* Countdown & GitHub Stats Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4 relative z-20">
-        <div className="space-y-16 max-w-6xl mx-auto">
-          {/* Launch Countdown */}
-          <div className="text-center space-y-8">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+      <section className="min-h-screen flex items-center justify-center px-4 relative z-20">
+        <div className="text-center max-w-6xl mx-auto">
+          {/* Countdown */}
+          <div className="mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-12">
               Launch Countdown
             </h2>
-            
-            <div className="flex items-center justify-center space-x-8 text-center">
-              <div className="flex flex-col items-center">
-                <div className="text-6xl md:text-8xl font-bold text-purple-600">
-                  {timeLeft.days.toString().padStart(2, '0')}
+            <p className="text-lg text-gray-500 mb-2 max-w-2xl mx-auto animate-fade-in-delayed-2">
+              June 18, 2025 6 PM IST
+            </p>
+            <div className="flex justify-center items-center gap-4 md:gap-8 text-6xl md:text-8xl font-bold">
+              <div className="text-center">
+                <div className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  {timeLeft.days.toString().padStart(2, "0")}
                 </div>
-                <div className="text-sm md:text-lg text-muted-foreground font-medium">DAYS</div>
+                <div className="text-sm md:text-base text-gray-500 mt-2">DAYS</div>
               </div>
-              
-              <div className="text-6xl md:text-8xl font-bold text-purple-600">:</div>
-              
-              <div className="flex flex-col items-center">
-                <div className="text-6xl md:text-8xl font-bold text-pink-600">
-                  {timeLeft.hours.toString().padStart(2, '0')}
+              <div className="text-purple-400">:</div>
+              <div className="text-center">
+                <div className="bg-gradient-to-r from-pink-600 to-indigo-600 bg-clip-text text-transparent">
+                  {timeLeft.hours.toString().padStart(2, "0")}
                 </div>
-                <div className="text-sm md:text-lg text-muted-foreground font-medium">HOURS</div>
+                <div className="text-sm md:text-base text-gray-500 mt-2">HOURS</div>
               </div>
-              
-              <div className="text-6xl md:text-8xl font-bold text-pink-600">:</div>
-              
-              <div className="flex flex-col items-center">
-                <div className="text-6xl md:text-8xl font-bold text-blue-600">
-                  {timeLeft.minutes.toString().padStart(2, '0')}
+              <div className="text-pink-400">:</div>
+              <div className="text-center">
+                <div className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  {timeLeft.minutes.toString().padStart(2, "0")}
                 </div>
-                <div className="text-sm md:text-lg text-muted-foreground font-medium">MINUTES</div>
+                <div className="text-sm md:text-base text-gray-500 mt-2">MINUTES</div>
               </div>
-              
-              <div className="text-6xl md:text-8xl font-bold text-blue-600">:</div>
-              
-              <div className="flex flex-col items-center">
-                <div className="text-6xl md:text-8xl font-bold text-purple-600">
-                  {timeLeft.seconds.toString().padStart(2, '0')}
+              <div className="text-indigo-400">:</div>
+              <div className="text-center">
+                <div className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  {timeLeft.seconds.toString().padStart(2, "0")}
                 </div>
-                <div className="text-sm md:text-lg text-muted-foreground font-medium">SECONDS</div>
+                <div className="text-sm md:text-base text-gray-500 mt-2">SECONDS</div>
               </div>
             </div>
           </div>
 
           {/* GitHub Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="text-center bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <Star className="w-8 h-8 text-yellow-500" />
-                  <span className="text-3xl font-bold text-purple-600">
-                    {githubStats.loading ? <LoadingDots /> : githubStats.stars}
-                  </span>
-                </div>
-                <p className="text-muted-foreground font-medium">GitHub Stars</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <Card className="bg-white/70 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+                <div className="text-3xl font-bold text-gray-800">247</div>
+                <div className="text-gray-600">GitHub Stars</div>
               </CardContent>
             </Card>
-            
-            <Card className="text-center bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <GitFork className="w-8 h-8 text-blue-500" />
-                  <span className="text-3xl font-bold text-purple-600">
-                    {githubStats.loading ? <LoadingDots /> : githubStats.forks}
-                  </span>
-                </div>
-                <p className="text-muted-foreground font-medium">Forks</p>
+
+            <Card className="bg-white/70 backdrop-blur-sm border-pink-200 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <GitFork className="h-8 w-8 text-purple-500 mx-auto mb-2" />
+                <div className="text-3xl font-bold text-gray-800">43</div>
+                <div className="text-gray-600">Forks</div>
               </CardContent>
             </Card>
-            
-            <Card className="text-center bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <Download className="w-8 h-8 text-green-500" />
-                  <span className="text-3xl font-bold text-purple-600">
-                    {githubStats.loading ? <LoadingDots /> : "Coming Soon"}
-                  </span>
-                </div>
-                <p className="text-muted-foreground font-medium">Downloads</p>
+
+            <Card className="bg-white/70 backdrop-blur-sm border-indigo-200 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <Download className="h-8 w-8 text-indigo-500 mx-auto mb-2" />
+                <div className="text-3xl font-bold text-gray-800">0</div>
+                <div className="text-gray-600">Downloads</div>
               </CardContent>
             </Card>
           </div>
