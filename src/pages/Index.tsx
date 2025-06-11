@@ -225,10 +225,10 @@ const Index = () => {
               VibeLayer
             </h1>
             <p className="text-xl animate-fade-in-delayed md:text-2xl text-gray-600 mb-8 animate-fade-in-delayed">
-              Your adorable desktop companion with transparent stickers
+              Your adorable desktop companion who vibes with you
             </p>
             <p className="text-lg animate-fade-in-delayed-2 text-gray-500 mb-12 max-w-2xl mx-auto animate-fade-in-delayed-2">
-              Transform your desktop with customizable stickers, GIFs, and companions that float alongside your work
+              Transform your desktop with customizable stickers, GIFs, and companions that float alongside on your screen
             </p>
             {/* <Button
               onClick={handleConfetti}
