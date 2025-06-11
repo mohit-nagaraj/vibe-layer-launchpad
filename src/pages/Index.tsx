@@ -182,23 +182,23 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-x-hidden">
       {/* Floating Elements */}
-      <div className="fixed left-4 top-1/4 z-10 opacity-40 animate-float">
+      <div className="fixed left-4 top-1/4 z-10 opacity-50 animate-float">
         <div className="w-16 h-16 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full opacity-60 blur-sm"></div>
       </div>
-      <div className="fixed left-8 top-1/2 z-10 opacity-40 animate-float" style={{ animationDelay: '1s' }}>
+      <div className="fixed left-8 top-1/2 z-10 opacity-50 animate-float" style={{ animationDelay: '1s' }}>
         <div className="w-12 h-12 bg-gradient-to-r from-blue-300 to-purple-300 rounded-full opacity-50 blur-sm"></div>
       </div>
-      <div className="fixed left-2 top-3/4 z-10 opacity-40 animate-float" style={{ animationDelay: '2s' }}>
+      <div className="fixed left-2 top-3/4 z-10 opacity-50 animate-float" style={{ animationDelay: '2s' }}>
         <div className="w-20 h-20 bg-gradient-to-r from-pink-300 to-yellow-300 rounded-full opacity-40 blur-sm"></div>
       </div>
 
-      <div className="fixed right-4 top-1/3 z-10 opacity-40 animate-float" style={{ animationDelay: '0.5s' }}>
+      <div className="fixed right-4 top-1/3 z-10 opacity-50 animate-float" style={{ animationDelay: '0.5s' }}>
         <div className="w-14 h-14 bg-gradient-to-r from-green-300 to-blue-300 rounded-full opacity-60 blur-sm"></div>
       </div>
-      <div className="fixed right-8 top-1/2 z-10 opacity-40 animate-float" style={{ animationDelay: '1.5s' }}>
+      <div className="fixed right-8 top-1/2 z-10 opacity-50 animate-float" style={{ animationDelay: '1.5s' }}>
         <div className="w-18 h-18 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full opacity-50 blur-sm"></div>
       </div>
-      <div className="fixed right-2 top-2/3 z-10 opacity-40 animate-float" style={{ animationDelay: '2.5s' }}>
+      <div className="fixed right-2 top-2/3 z-10 opacity-50 animate-float" style={{ animationDelay: '2.5s' }}>
         <div className="w-16 h-16 bg-gradient-to-r from-yellow-300 to-red-300 rounded-full opacity-40 blur-sm"></div>
       </div>
       {/* Show only on desktop */}
@@ -256,7 +256,12 @@ const Index = () => {
         <div className="text-center max-w-6xl mx-auto">
           {/* Countdown */}
           <div className="mb-16">
-            <SparklesText sparklesCount={14} className='text-black special-cursive mb-12'>Launch Countdown</SparklesText>
+            <SparklesText
+              sparklesCount={14}
+              className="text-xl sm:text-2xl md:text-6xl text-black special-cursive mb-12"
+            >
+              Launch Countdown
+            </SparklesText>
             {/* <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-12">
               Launch Countdown
             </h2> */}
@@ -306,7 +311,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-[#A855F744] py-4 md:py-0 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-white/70 backdrop-blur-sm border-[#A855F766] py-4 md:py-0 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6 text-center">
                 <GitFork className="h-8 w-8 text-purple-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
@@ -316,7 +321,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-indigo-200 py-4 md:py-0 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-white/70 backdrop-blur-sm border-indigo-300 py-4 md:py-0 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6 text-center">
                 <Download className="h-8 w-8 text-indigo-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
