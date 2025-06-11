@@ -186,7 +186,7 @@ const Index = () => {
         <div className="space-y-8 max-w-4xl mx-auto relative z-10">
           <div className="space-y-4">
             <RainbowButton size="sm" variant='outline' className='mb-6'>Free & Open Source</RainbowButton>
-            <h1 className="text-6xl animate-fade-in md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
+            <h1 style={{lineHeight: 1.5}} className="text-6xl animate-fade-in md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
               VibeLayer
             </h1>
             <p className="text-xl animate-fade-in-delayed md:text-2xl text-gray-600 mb-8 animate-fade-in-delayed">
