@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Star, GitFork, Download, Sparkles, Eye, Settings, Palette, Shield } from "lucide-react";
+import { Star, GitFork, Download, Sparkles, Eye, Settings, Palette, Shield, Zap, Github } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -13,6 +13,7 @@ const Index = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -85,6 +86,7 @@ const Index = () => {
           throw error;
         }
       } else {
+        setIsSubmitted(true);
         toast({
           title: "Welcome to the waitlist! 🎉",
           description: "We'll notify you when Vibelayer launches!"
@@ -228,101 +230,125 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Waitlist & Features Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4 relative z-20">
-        <div className="space-y-16 max-w-6xl mx-auto">
-          {/* Waitlist Signup */}
-          <Card className="max-w-md mx-auto bg-white/90 backdrop-blur-sm border-purple-200 shadow-xl">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Join the Waitlist
-              </CardTitle>
-              <CardDescription>
-                Be the first to experience the magic when we launch!
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleWaitlistSignup} className="space-y-4">
+      
+      {/* Waitlist Section */}
+      <section className="min-h-screen flex items-center justify-center px-4 relative z-20">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+            Join the Waitlist
+          </h2>
+          <p className="text-xl text-gray-600 mb-12">
+            Be the first to know when Vibelayer launches and get exclusive early access!
+          </p>
+
+          {!isSubmitted ? (
+            <form onSubmit={handleWaitlistSignup} className="space-y-6">
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <Input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="border-purple-200 focus:border-purple-400"
                   required
+                  className="flex-1 px-6 py-4 text-lg border-purple-200 focus:border-purple-400 rounded-full"
                   disabled={isSubmitting}
                 />
-                <Button 
-                  type="submit" 
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                <Button
+                  type="submit"
                   disabled={isSubmitting}
+                  className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
                 >
-                  <Sparkles className="w-4 h-4 mr-2" />
                   {isSubmitting ? 'Joining...' : 'Join Waitlist'}
                 </Button>
-              </form>
-            </CardContent>
-          </Card>
-
-          {/* Features Grid */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Magical Features
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <CardContent className="pt-6">
-                  <div className="text-center space-y-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto">
-                      <Sparkles className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-purple-700">Transparent Stickers</h3>
-                    <p className="text-sm text-muted-foreground">Place animated stickers anywhere on your screen with full transparency</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <CardContent className="pt-6">
-                  <div className="text-center space-y-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto">
-                      <Eye className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-purple-700">AI Background Removal</h3>
-                    <p className="text-sm text-muted-foreground">Built-in AI removes backgrounds from your images automatically</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <CardContent className="pt-6">
-                  <div className="text-center space-y-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto">
-                      <Settings className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-purple-700">Advanced Controls</h3>
-                    <p className="text-sm text-muted-foreground">Always on top, auto-launch, and screen capture protection</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <CardContent className="pt-6">
-                  <div className="text-center space-y-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-yellow-500 rounded-full flex items-center justify-center mx-auto">
-                      <Palette className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-purple-700">Theme Support</h3>
-                    <p className="text-sm text-muted-foreground">Dark and light themes to match your desktop aesthetic</p>
-                  </div>
-                </CardContent>
-              </Card>
+              </div>
+            </form>
+          ) : (
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-green-200">
+              <div className="text-6xl mb-4">🎉</div>
+              <h3 className="text-2xl font-semibold text-green-600 mb-2">You're on the list!</h3>
+              <p className="text-gray-600">We'll notify you as soon as Vibelayer is ready to download.</p>
             </div>
+          )}
+
+          <div className="mt-12 flex justify-center">
+            <a
+              href="https://github.com/yourusername/vibelayer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors duration-300"
+            >
+              <Github className="h-6 w-6" />
+              <span className="text-lg">View on GitHub</span>
+            </a>
           </div>
         </div>
       </section>
 
+      <section className="min-h-screen flex items-center justify-center px-4 relative z-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2
+              className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4"
+              style={{ lineHeight: 1.5 }}
+            >
+              Amazing Features
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Everything you need to make your desktop more fun and personalized
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="bg-white/70 backdrop-blur-sm border-purple-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
+                <Zap className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Background Remover</h3>
+                <p className="text-gray-600">Built-in AI-powered background removal for perfect transparent stickers</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/70 backdrop-blur-sm border-pink-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
+                <Palette className="h-12 w-12 text-pink-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Theme Customization</h3>
+                <p className="text-gray-600">Dark and light themes with extensive customization options</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/70 backdrop-blur-sm border-indigo-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
+                <Settings className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Always on Top</h3>
+                <p className="text-gray-600">Keep your stickers visible above all applications</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/70 backdrop-blur-sm border-purple-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
+                <Eye className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Screen Capture Control</h3>
+                <p className="text-gray-600">Hide or show stickers during screen recording and screenshots</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/70 backdrop-blur-sm border-pink-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
+                <Shield className="h-12 w-12 text-pink-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Auto Launch</h3>
+                <p className="text-gray-600">Start with your system and have your companions ready</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/70 backdrop-blur-sm border-indigo-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
+                <Sparkles className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-3">GIF Support</h3>
+                <p className="text-gray-600">Import and display animated GIFs as desktop companions</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
       <style dangerouslySetInnerHTML={{
         __html: `
           @keyframes float {
