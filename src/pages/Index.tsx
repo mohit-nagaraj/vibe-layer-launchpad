@@ -26,6 +26,16 @@ const Index = () => {
     downloads: 0,
     loading: true
   });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(loadingTimer)
+  }, [])
 
   // Countdown to June 18, 2025 6 PM IST
   useEffect(() => {
@@ -56,7 +66,7 @@ const Index = () => {
         setGithubStats({
           stars: 247,
           forks: 52,
-          downloads: 0, // Coming soon
+          downloads: 0,
           loading: false
         });
       }, 2000);
@@ -104,6 +114,25 @@ const Index = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="relative">
+            <div className="w-20 h-20 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto"></div>
+            <div
+              className="absolute inset-0 w-20 h-20 border-4 border-transparent border-r-pink-400 rounded-full animate-spin mx-auto"
+              style={{ animationDirection: "reverse", animationDuration: "1.5s" }}
+            ></div>
+          </div>
+          <p className="mt-4 text-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Loading Vibelayer...
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   const LoadingDots = () => (
     <div className="flex space-x-1">
       <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
@@ -149,12 +178,16 @@ const Index = () => {
               Transform your desktop with customizable stickers, GIFs, and companions that float alongside your work
             </p>
           </div>
-          
+
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <Button size="lg" className="px-12 py-6 text-xl font-semibold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 animate-glow">
-            Coming Soon
-            
-          </Button>
+            <a href="#waitlist">
+              <Button
+                size="lg"
+                className="px-12 py-6 text-xl font-semibold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 animate-glow"
+              >
+                Coming Soon
+              </Button>
+            </a>
           </div>
         </div>
       </section>
@@ -206,7 +239,9 @@ const Index = () => {
             <Card className="bg-white/70 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6 text-center">
                 <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
-                <div className="text-3xl font-bold text-gray-800">247</div>
+                <div className="text-3xl font-bold text-gray-800">
+                  {githubStats.loading ? <LoadingDots /> : githubStats.stars}
+                </div>
                 <div className="text-gray-600">GitHub Stars</div>
               </CardContent>
             </Card>
@@ -214,7 +249,9 @@ const Index = () => {
             <Card className="bg-white/70 backdrop-blur-sm border-pink-200 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6 text-center">
                 <GitFork className="h-8 w-8 text-purple-500 mx-auto mb-2" />
-                <div className="text-3xl font-bold text-gray-800">43</div>
+                <div className="text-3xl font-bold text-gray-800">
+                  {githubStats.loading ? <LoadingDots /> : githubStats.forks}
+                </div>
                 <div className="text-gray-600">Forks</div>
               </CardContent>
             </Card>
@@ -222,7 +259,9 @@ const Index = () => {
             <Card className="bg-white/70 backdrop-blur-sm border-indigo-200 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6 text-center">
                 <Download className="h-8 w-8 text-indigo-500 mx-auto mb-2" />
-                <div className="text-3xl font-bold text-gray-800">0</div>
+                <div className="text-3xl font-bold text-gray-800">
+                  {githubStats.loading ? <LoadingDots /> : githubStats.downloads}
+                </div>
                 <div className="text-gray-600">Downloads</div>
               </CardContent>
             </Card>
@@ -230,9 +269,9 @@ const Index = () => {
         </div>
       </section>
 
-      
+
       {/* Waitlist Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 relative z-20">
+      <section id='waitlist' className="min-h-screen flex items-center justify-center px-4 relative z-20">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
             Join the Waitlist
