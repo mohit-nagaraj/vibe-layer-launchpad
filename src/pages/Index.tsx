@@ -8,6 +8,11 @@ import { Separator } from "@/components/ui/separator";
 import { Star, GitFork, Download, Sparkles, Eye, Settings, Palette, Shield, Zap, Github } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { InteractiveHoverButton } from '@/components/magicui/interactive-hover-button';
+import { RainbowButton } from '@/components/magicui/rainbow-button';
+import { ScrollProgress } from '@/components/magicui/scroll-progress';
+import { SmoothCursor } from '@/components/ui/smooth-cursor';
+import { AvatarCirclesDemo } from '@/components/AvatarCircleDemo';
 
 const Index = () => {
   const { toast } = useToast();
@@ -163,11 +168,13 @@ const Index = () => {
       <div className="fixed right-2 top-2/3 z-10 animate-float" style={{ animationDelay: '2.5s' }}>
         <div className="w-16 h-16 bg-gradient-to-r from-yellow-300 to-red-300 rounded-full opacity-40 blur-sm"></div>
       </div>
-
+      <ScrollProgress className="h-3 w-3" />
+      <SmoothCursor />
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative z-20">
         <div className="space-y-8 max-w-4xl mx-auto">
           <div className="space-y-4">
+            <RainbowButton size="sm" variant='outline' className='mb-6'>Free & Open Source</RainbowButton>
             <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
               VibeLayer
             </h1>
@@ -181,19 +188,18 @@ const Index = () => {
 
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <a href="#waitlist">
-              <Button
-                size="lg"
-                className="px-12 py-6 text-xl font-semibold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 animate-glow"
+              <InteractiveHoverButton
+                className="px-7 py-3 text-xl font-semibold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 animate-glow"
               >
                 Coming Soon
-              </Button>
+              </InteractiveHoverButton>
             </a>
           </div>
         </div>
       </section>
 
       {/* Countdown & GitHub Stats Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 relative z-20">
+      <section className="min-h-screen flex items-center justify-center p-4 relative z-20">
         <div className="text-center max-w-6xl mx-auto">
           {/* Countdown */}
           <div className="mb-16">
@@ -279,7 +285,6 @@ const Index = () => {
           <p className="text-xl text-gray-600 mb-12">
             Be the first to know when Vibelayer launches and get exclusive early access!
           </p>
-
           {!isSubmitted ? (
             <form onSubmit={handleWaitlistSignup} className="space-y-6">
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
@@ -308,10 +313,10 @@ const Index = () => {
               <p className="text-gray-600">We'll notify you as soon as Vibelayer is ready to download.</p>
             </div>
           )}
-
+          <AvatarCirclesDemo />
           <div className="mt-12 flex justify-center">
             <a
-              href="https://github.com/yourusername/vibelayer"
+              href="https://github.com/mohit-nagaraj/VibeLayer"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors duration-300"
