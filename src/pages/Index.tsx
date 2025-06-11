@@ -16,6 +16,7 @@ import { AvatarCirclesDemo } from '@/components/AvatarCircleDemo';
 import { SparklesText } from '@/components/magicui/sparkles-text';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { HyperText } from '@/components/magicui/hyper-text';
+import { RetroGrid } from '@/components/magicui/retro-grid';
 
 const Index = () => {
   const { toast } = useToast();
@@ -175,11 +176,14 @@ const Index = () => {
       {/* Show only on desktop */}
       <div className="hidden md:block">
         <ScrollProgress className="h-[6px]" />
-        {displayCursor&&<SmoothCursor />}
+        {displayCursor && <SmoothCursor />}
       </div>
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative z-20">
-        <div className="space-y-8 max-w-4xl mx-auto">
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+          <RetroGrid />
+        </div>
+        <div className="space-y-8 max-w-4xl mx-auto relative z-10">
           <div className="space-y-4">
             <RainbowButton size="sm" variant='outline' className='mb-6'>Free & Open Source</RainbowButton>
             <h1 className="text-6xl animate-fade-in md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
