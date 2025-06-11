@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -109,6 +110,7 @@
     --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
     --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
     --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+    --animate-grid: grid 15s linear infinite;
   }
 }
 
@@ -158,4 +160,148 @@
     background-position: 200%;
     }
   }
+  @keyframes grid {
+  0% {
+    transform: translateY(-50%);
+    }
+  100% {
+    transform: translateY(0);
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-delayed {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-delayed-2 {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(147, 51, 234, 0.5), 0 0 40px rgba(236, 72, 153, 0.3);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 8s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  .animate-float-slow {
+    animation: float-slow 10s ease-in-out infinite;
+    animation-delay: 4s;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+
+  .animate-fade-in-delayed {
+    animation: fade-in-delayed 1s ease-out 0.3s both;
+  }
+
+  .animate-fade-in-delayed-2 {
+    animation: fade-in-delayed-2 1s ease-out 0.6s both;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+}
+
+.special-cursive {
+  font-family: 'Edu SA Hand', cursive;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.animate-rainbow {
+  animation: rainbow var(--speed, 2s) infinite linear;
+  background-size: 200%;
+  /* Optional: smooth out the animation for gradients */
+  transition: background-position 0.3s;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
 }

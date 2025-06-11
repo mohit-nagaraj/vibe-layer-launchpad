@@ -13,6 +13,9 @@ import { RainbowButton } from '@/components/magicui/rainbow-button';
 import { ScrollProgress } from '@/components/magicui/scroll-progress';
 import { SmoothCursor } from '@/components/ui/smooth-cursor';
 import { AvatarCirclesDemo } from '@/components/AvatarCircleDemo';
+import { SparklesText } from '@/components/magicui/sparkles-text';
+import { NumberTicker } from '@/components/magicui/number-ticker';
+import { HyperText } from '@/components/magicui/hyper-text';
 
 const Index = () => {
   const { toast } = useToast();
@@ -32,6 +35,7 @@ const Index = () => {
     loading: true
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [displayCursor, setDisplayCursor] = useState(true);
 
   useEffect(() => {
     // Simulate loading
@@ -168,20 +172,23 @@ const Index = () => {
       <div className="fixed right-2 top-2/3 z-10 animate-float" style={{ animationDelay: '2.5s' }}>
         <div className="w-16 h-16 bg-gradient-to-r from-yellow-300 to-red-300 rounded-full opacity-40 blur-sm"></div>
       </div>
-      <ScrollProgress className="h-3 w-3" />
-      <SmoothCursor />
+      {/* Show only on desktop */}
+      <div className="hidden md:block">
+        <ScrollProgress className="h-[6px]" />
+        {displayCursor&&<SmoothCursor />}
+      </div>
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative z-20">
         <div className="space-y-8 max-w-4xl mx-auto">
           <div className="space-y-4">
             <RainbowButton size="sm" variant='outline' className='mb-6'>Free & Open Source</RainbowButton>
-            <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
+            <h1 className="text-6xl animate-fade-in md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
               VibeLayer
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in-delayed">
+            <p className="text-xl animate-fade-in-delayed md:text-2xl text-gray-600 mb-8 animate-fade-in-delayed">
               Your adorable desktop companion with transparent stickers
             </p>
-            <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto animate-fade-in-delayed-2">
+            <p className="text-lg animate-fade-in-delayed-2 text-gray-500 mb-12 max-w-2xl mx-auto animate-fade-in-delayed-2">
               Transform your desktop with customizable stickers, GIFs, and companions that float alongside your work
             </p>
           </div>
@@ -189,6 +196,8 @@ const Index = () => {
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <a href="#waitlist">
               <InteractiveHoverButton
+                onMouseEnter={() => setDisplayCursor(false)}
+                onMouseLeave={() => setDisplayCursor(true)}
                 className="px-7 py-3 text-xl font-semibold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 animate-glow"
               >
                 Coming Soon
@@ -203,9 +212,10 @@ const Index = () => {
         <div className="text-center max-w-6xl mx-auto">
           {/* Countdown */}
           <div className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-12">
+            <SparklesText sparklesCount={14} className='text-black special-cursive mb-12'>Launch Countdown</SparklesText>
+            {/* <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-12">
               Launch Countdown
-            </h2>
+            </h2> */}
             <p className="text-lg text-gray-500 mb-2 max-w-2xl mx-auto animate-fade-in-delayed-2">
               June 18, 2025 6 PM IST
             </p>
@@ -246,7 +256,7 @@ const Index = () => {
               <CardContent className="p-6 text-center">
                 <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
-                  {githubStats.loading ? <LoadingDots /> : githubStats.stars}
+                  {githubStats.loading ? <LoadingDots /> : <NumberTicker value={githubStats.stars} />}
                 </div>
                 <div className="text-gray-600">GitHub Stars</div>
               </CardContent>
@@ -256,7 +266,7 @@ const Index = () => {
               <CardContent className="p-6 text-center">
                 <GitFork className="h-8 w-8 text-purple-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
-                  {githubStats.loading ? <LoadingDots /> : githubStats.forks}
+                  {githubStats.loading ? <LoadingDots /> : <NumberTicker value={githubStats.forks} />}
                 </div>
                 <div className="text-gray-600">Forks</div>
               </CardContent>
@@ -266,7 +276,7 @@ const Index = () => {
               <CardContent className="p-6 text-center">
                 <Download className="h-8 w-8 text-indigo-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
-                  {githubStats.loading ? <LoadingDots /> : githubStats.downloads}
+                  {githubStats.loading ? <LoadingDots /> : <NumberTicker value={githubStats.downloads} />}
                 </div>
                 <div className="text-gray-600">Downloads</div>
               </CardContent>
@@ -279,9 +289,9 @@ const Index = () => {
       {/* Waitlist Section */}
       <section id='waitlist' className="min-h-screen flex items-center justify-center px-4 relative z-20">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
             Join the Waitlist
-          </h2>
+          </h1>
           <p className="text-xl text-gray-600 mb-12">
             Be the first to know when Vibelayer launches and get exclusive early access!
           </p>
@@ -294,15 +304,17 @@ const Index = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="flex-1 px-6 py-4 text-lg border-purple-200 focus:border-purple-400 rounded-full"
+                  className="flex-1 p-6 text-lg border-purple-200 focus:border-purple-400 focus:shadow-md rounded-full"
                   disabled={isSubmitting}
                 />
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+                  onMouseEnter={() => setDisplayCursor(false)}
+                  onMouseLeave={() => setDisplayCursor(true)}
+                  className="px-8 py-6 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
                 >
-                  {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+                  {isSubmitting ? 'Joining...' : 'Sign Up'}
                 </Button>
               </div>
             </form>
@@ -314,7 +326,7 @@ const Index = () => {
             </div>
           )}
           <AvatarCirclesDemo />
-          <div className="mt-12 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <a
               href="https://github.com/mohit-nagaraj/VibeLayer"
               target="_blank"
@@ -331,12 +343,12 @@ const Index = () => {
       <section className="min-h-screen flex items-center justify-center px-4 relative z-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2
+            <HyperText
               className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4"
               style={{ lineHeight: 1.5 }}
             >
-              Amazing Features
-            </h2>
+              Magikkal Features
+            </HyperText>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Everything you need to make your desktop more fun and personalized
             </p>

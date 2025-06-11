@@ -49,7 +49,7 @@ const RainbowButton = React.forwardRef<HTMLButtonElement, RainbowButtonProps>(
     return (
       <Comp
         data-slot="button"
-        className={cn(rainbowButtonVariants({ variant, size, className }),'opacity-80')}
+        className={cn(rainbowButtonVariants({ variant, size, className }),'opacity-90 pointer-events-none')}
         ref={ref}
         {...props}
       />

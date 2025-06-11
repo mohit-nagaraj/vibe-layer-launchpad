@@ -18,7 +18,7 @@ export const AvatarCircles = ({
   avatarUrls,
 }: AvatarCirclesProps) => {
   return (
-    <div className={cn("z-10 flex -space-x-4 rtl:space-x-reverse mt-4 justify-center items-center", className)}>
+    <div className={cn("z-10 flex -space-x-4 rtl:space-x-reverse mt-12 justify-center items-center", className)}>
       {avatarUrls.map((url, index) => (
       <img
         key={index}

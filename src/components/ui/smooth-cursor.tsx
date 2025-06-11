@@ -202,7 +202,7 @@ export function SmoothCursor({
         damping: 30,
       }}
     >
-      {cursor}
+      <div style={{ scale: 0.2 }}>{cursor}</div>
     </motion.div>
   );
 }
