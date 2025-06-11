@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,10 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Star, GitFork, Download, Sparkles, Eye, Settings, Palette, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -62,14 +63,41 @@ const Index = () => {
     fetchGithubStats();
   }, []);
 
-  const handleWaitlistSignup = (e: React.FormEvent) => {
+  const handleWaitlistSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ email }]);
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast({
+            title: "Already on the waitlist! 📧",
+            description: "This email is already registered for our waitlist."
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "Welcome to the waitlist! 🎉",
+          description: "We'll notify you when Vibelayer launches!"
+        });
+        setEmail('');
+      }
+    } catch (error) {
+      console.error('Error signing up for waitlist:', error);
       toast({
-        title: "Welcome to the waitlist! 🎉",
-        description: "We'll notify you when Vibelayer launches!"
+        title: "Oops! Something went wrong",
+        description: "Please try again later."
       });
-      setEmail('');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -237,13 +265,15 @@ const Index = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="border-purple-200 focus:border-purple-400"
                   required
+                  disabled={isSubmitting}
                 />
                 <Button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                  disabled={isSubmitting}
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
-                  Join Waitlist
+                  {isSubmitting ? 'Joining...' : 'Join Waitlist'}
                 </Button>
               </form>
             </CardContent>
@@ -326,3 +356,5 @@ const Index = () => {
 };
 
 export default Index;
+
+</edits_to_apply>
