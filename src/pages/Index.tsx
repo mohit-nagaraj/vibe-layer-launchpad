@@ -39,6 +39,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayCursor, setDisplayCursor] = useState(true);
   const confettiRef = useRef<ConfettiRef>(null);
+  const [currSignUp, setCurrSignup] = useState(0);
 
   useEffect(() => {
     // Simulate loading
@@ -83,6 +84,25 @@ const Index = () => {
         });
       }, 2000);
     };
+
+
+    const fetchWaitlistCount = async () => {
+      try {
+        const { count, error } = await supabase
+          .from('waitlist')
+          .select('*', { count: 'exact', head: true });
+        console.log('Waitlist count:', count);
+        if (error) {
+          console.error('Error fetching waitlist count:', error);
+        } else {
+          setCurrSignup(count || 0);
+        }
+      } catch (error) {
+        console.error('Error fetching waitlist count:', error);
+      }
+    };
+
+    fetchWaitlistCount();
 
     fetchGithubStats();
   }, []);
@@ -348,7 +368,7 @@ const Index = () => {
               <p className="text-gray-600">We'll notify you as soon as Vibelayer is ready to download.</p>
             </div>
           )}
-          <AvatarCirclesDemo />
+          <AvatarCirclesDemo currSignUp={currSignUp} />
           <div className="mt-6 flex justify-center">
             <a
               href="https://github.com/mohit-nagaraj/VibeLayer"

@@ -27,6 +27,6 @@ const avatars = [
   },
 ];
 
-export function AvatarCirclesDemo() {
-  return <AvatarCircles className="items-center align-center" numPeople={5} avatarUrls={avatars} />;
+export function AvatarCirclesDemo({currSignUp}: { currSignUp: number }) {
+  return <AvatarCircles className="items-center align-center" numPeople={currSignUp} avatarUrls={avatars} />;
 }
