@@ -50,9 +50,9 @@ const Index = () => {
     return () => clearTimeout(loadingTimer)
   }, [])
 
-  // Countdown to June 18, 2025 6 PM IST
+  // Countdown to July 1, 2025 6 PM IST
   useEffect(() => {
-    const targetDate = new Date('2025-06-18T18:00:00+05:30').getTime();
+    const targetDate = new Date('2025-07-01T18:00:00+05:30').getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -266,7 +266,7 @@ const Index = () => {
               Launch Countdown
             </h2> */}
             <p className="text-lg text-gray-500 mb-2 max-w-2xl mx-auto animate-fade-in-delayed-2">
-              June 18, 2025 6 PM IST
+              July 01, 2025 6 PM IST
             </p>
             <div className="flex justify-center items-center gap-2 sm:gap-4 md:gap-8 text-3xl sm:text-5xl md:text-8xl font-bold">
               <div className="text-center">
