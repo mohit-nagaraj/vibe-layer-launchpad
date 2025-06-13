@@ -17,6 +17,7 @@ import { SparklesText } from '@/components/magicui/sparkles-text';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { HyperText } from '@/components/magicui/hyper-text';
 import { RetroGrid } from '@/components/magicui/retro-grid';
+import { WobbleCard } from '@/components/ui/wobble-card';
 import { Confetti, ConfettiButton, type ConfettiRef } from "@/components/magicui/confetti";
 
 const Index = () => {
@@ -355,7 +356,7 @@ const Index = () => {
       {/* <Separator className="my-12 w-full max-w-6xl mx-auto bg-gradient-to-r from-purple-600 to-pink-600 opacity-10 h-[2px]"/> */}
 
       {/* Waitlist Section */}
-      <section id='waitlist' className="flex py-12 mt-24 mb-24 items-center justify-center px-4 relative z-20">
+      <section id='waitlist' className="flex py-12 mt-24 mb-48 items-center justify-center px-4 relative z-20">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-6xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
             Join the Waitlist
@@ -406,71 +407,67 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="min-h-screen flex items-center justify-center px-4 relative z-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+      <section className="mt-24 flex items-center justify-center px-4 relative z-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
             <HyperText
-              className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4"
-              style={{ lineHeight: 1.5 }}
+              className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
             >
-              Magikkal Features
+              Magical Features
             </HyperText>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Everything you need to make your desktop more fun and personalized
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="bg-white/70 backdrop-blur-sm border-purple-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <Zap className="h-12 w-12 text-purple-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-3">Background Remover</h3>
-                <p className="text-gray-600">Built-in AI-powered background removal for perfect transparent stickers</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/70 backdrop-blur-sm border-pink-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <Palette className="h-12 w-12 text-pink-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-3">Theme Customization</h3>
-                <p className="text-gray-600">Dark and light themes with extensive customization options</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/70 backdrop-blur-sm border-indigo-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <Settings className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-3">Always on Top</h3>
-                <p className="text-gray-600">Keep your stickers visible above all applications</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/70 backdrop-blur-sm border-purple-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <Eye className="h-12 w-12 text-purple-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-3">Screen Capture Control</h3>
-                <p className="text-gray-600">Hide or show stickers during screen recording and screenshots</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/70 backdrop-blur-sm border-pink-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <Shield className="h-12 w-12 text-pink-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-3">Auto Launch</h3>
-                <p className="text-gray-600">Start with your system and have your companions ready</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/70 backdrop-blur-sm border-indigo-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <Sparkles className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-3">GIF Support</h3>
-                <p className="text-gray-600">Import and display animated GIFs as desktop companions</p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full p-4 mb-4">
+        <WobbleCard
+          containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
+          className=""
+        >
+          <div className="max-w-xs">
+            <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              Effortless Sticker Magic
+            </h2>
+            <p className="mt-4 text-left  text-base/6 text-neutral-200">
+              Make your desktop come alive with drag-and-drop stickers, instant background removal, and total layout freedom.
+            </p>
+          </div>
+          <img
+            src="/preview1.webp"
+            width={500}
+            height={500}
+            alt="linear demo image"
+            className="absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl"
+          />
+        </WobbleCard>
+        <WobbleCard containerClassName="col-span-1 min-h-[300px]">
+          <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+            Private & Cross-Platform Vibes
+          </h2>
+          <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+           VibeLayer is built for everyone, everywhere.
+          </p>
+        </WobbleCard>
+        <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
+          <div className="max-w-sm">
+            <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              Total Control & Customization
+            </h2>
+            <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+              Personalize your experience with powerful settings and seamless sticker management like Auto-launch and Hide Capture.
+            </p>
+          </div>
+          <img
+            src="/preview2.webp"
+            width={500}
+            height={500}
+            alt="linear demo image"
+            className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl"
+          />
+        </WobbleCard>
+      </div>
       <style dangerouslySetInnerHTML={{
         __html: `
           @keyframes float {
