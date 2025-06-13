@@ -3,9 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Star, GitFork, Download, Sparkles, Eye, Settings, Palette, Shield, Zap, Github } from "lucide-react";
+import { Star, GitFork, Download, Sparkles, Github } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { InteractiveHoverButton } from '@/components/magicui/interactive-hover-button';
@@ -19,6 +18,7 @@ import { HyperText } from '@/components/magicui/hyper-text';
 import { RetroGrid } from '@/components/magicui/retro-grid';
 import { WobbleCard } from '@/components/ui/wobble-card';
 import { Confetti, ConfettiButton, type ConfettiRef } from "@/components/magicui/confetti";
+import { BackgroundLines } from "@/components/ui/background-lines";
 
 const Index = () => {
   const { toast } = useToast();
@@ -356,55 +356,57 @@ const Index = () => {
       {/* <Separator className="my-12 w-full max-w-6xl mx-auto bg-gradient-to-r from-purple-600 to-pink-600 opacity-10 h-[2px]"/> */}
 
       {/* Waitlist Section */}
-      <section id='waitlist' className="flex py-12 mt-24 mb-48 items-center justify-center px-4 relative z-20">
-        <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-6xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
-            Join the Waitlist
-          </h1>
-          <p className="text-xl text-gray-600 mb-12">
-            Be the first to know when Vibelayer launches and get exclusive early access!
-          </p>
-          {!isSubmitted ? (
-            <form onSubmit={handleWaitlistSignup} className="space-y-6">
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 p-6 text-lg border-purple-200 focus:border-purple-400 focus:shadow-md rounded-full"
-                  disabled={isSubmitting}
-                />
-                <ConfettiButton type="submit"
-                  disabled={isSubmitting}
-                  onMouseEnter={() => setDisplayCursor(false)}
-                  onMouseLeave={() => setDisplayCursor(true)}
-                  className="px-8 py-6 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
-                  {isSubmitting ? 'Joining...' : 'Sign Up'}
-                </ConfettiButton>
+      <section id='waitlist' className="flex py-12 mt-24 mb-48 items-center justify-center px-4 relative z-20 overflow-hidden">
+        <BackgroundLines className="flex items-center justify-center w-full flex-col px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h1 className="text-6xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+              Join the Waitlist
+            </h1>
+            <p className="text-xl text-gray-600 mb-12">
+              Be the first to know when Vibelayer launches and get exclusive early access!
+            </p>
+            {!isSubmitted ? (
+              <form onSubmit={handleWaitlistSignup} className="space-y-6">
+                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="flex-1 p-6 text-lg border-purple-200 focus:border-purple-400 focus:shadow-md rounded-full"
+                    disabled={isSubmitting}
+                  />
+                  <ConfettiButton type="submit"
+                    disabled={isSubmitting}
+                    onMouseEnter={() => setDisplayCursor(false)}
+                    onMouseLeave={() => setDisplayCursor(true)}
+                    className="px-8 py-6 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+                    {isSubmitting ? 'Joining...' : 'Sign Up'}
+                  </ConfettiButton>
+                </div>
+              </form>
+            ) : (
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-green-200">
+                <div className="text-6xl mb-4">🎉</div>
+                <h3 className="text-2xl font-semibold text-green-600 mb-2">You're on the list!</h3>
+                <p className="text-gray-600">We'll notify you as soon as Vibelayer is ready to download.</p>
               </div>
-            </form>
-          ) : (
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-green-200">
-              <div className="text-6xl mb-4">🎉</div>
-              <h3 className="text-2xl font-semibold text-green-600 mb-2">You're on the list!</h3>
-              <p className="text-gray-600">We'll notify you as soon as Vibelayer is ready to download.</p>
+            )}
+            <AvatarCirclesDemo currSignUp={currSignUp} />
+            <div className="mt-6 flex justify-center">
+              <a
+                href="https://github.com/mohit-nagaraj/VibeLayer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors duration-300"
+              >
+                <Github className="h-6 w-6" />
+                <span className="text-lg">View on GitHub</span>
+              </a>
             </div>
-          )}
-          <AvatarCirclesDemo currSignUp={currSignUp} />
-          <div className="mt-6 flex justify-center">
-            <a
-              href="https://github.com/mohit-nagaraj/VibeLayer"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors duration-300"
-            >
-              <Github className="h-6 w-6" />
-              <span className="text-lg">View on GitHub</span>
-            </a>
           </div>
-        </div>
+        </BackgroundLines>
       </section>
 
       <section className="mt-24 flex items-center justify-center px-4 relative z-20">
@@ -447,7 +449,7 @@ const Index = () => {
             Private & Cross-Platform Vibes
           </h2>
           <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
-           VibeLayer is built for everyone, everywhere.
+            VibeLayer is built for everyone, everywhere.
           </p>
         </WobbleCard>
         <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
