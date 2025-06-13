@@ -19,6 +19,7 @@ import { RetroGrid } from '@/components/magicui/retro-grid';
 import { WobbleCard } from '@/components/ui/wobble-card';
 import { Confetti, ConfettiButton, type ConfettiRef } from "@/components/magicui/confetti";
 import { BackgroundLines } from "@/components/ui/background-lines";
+import { MacbookScroll } from "@/components/ui/macbook-scroll";
 
 const Index = () => {
   const { toast } = useToast();
@@ -251,6 +252,22 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <div className="overflow-hidden dark:bg-[#0B0B0F] bg-white w-full">
+      <MacbookScroll
+        // title={
+        //   <span>
+        //     This Macbook is built with Tailwindcss. <br /> No kidding.
+        //   </span>
+        // }
+        // badge={
+        //   <a href="https://peerlist.io/manuarora">
+        //     <Badge className="h-10 w-10 transform -rotate-12" />
+        //   </a>
+        // }
+        src={`/preview1.webp`}
+        showGradient={true}
+      />
+    </div>
 
       {/* Countdown & GitHub Stats Section */}
       <section className="min-h-screen flex items-center justify-center p-4 relative z-20">
