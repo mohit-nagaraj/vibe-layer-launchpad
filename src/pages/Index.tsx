@@ -220,7 +220,7 @@ const Index = () => {
         </div>
         <div className="space-y-8 max-w-4xl mx-auto relative z-10">
           <div className="space-y-4">
-            <RainbowButton size="sm" variant='outline' className='mb-6'>Free & Open Source</RainbowButton>
+            <RainbowButton size="sm" variant='outline' className='mb-6'>Always Free & Open Source</RainbowButton>
             <h1 style={{ lineHeight: 1.5 }} className="text-6xl animate-fade-in md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-fade-in">
               VibeLayer
             </h1>
@@ -256,15 +256,24 @@ const Index = () => {
         <div className="text-center max-w-6xl mx-auto">
           {/* Countdown */}
           <div className="mb-16">
-            <SparklesText
-              sparklesCount={14}
-              className="text-xl sm:text-2xl md:text-6xl text-black special-cursive mb-12"
-            >
-              Launch Countdown
-            </SparklesText>
-            {/* <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-12">
-              Launch Countdown
-            </h2> */}
+            <div className="relative mb-12 flex justify-center">
+              <div
+                className="absolute inset-0 w-full h-full rounded-[2.5rem] md:rounded-[4rem] bg-gradient-to-br from-white/10 via-purple-200/60 to-pink-200/60 shadow-xl"
+                style={{
+                  boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "1.5px solid rgba(255,255,255,0.25)",
+                  zIndex: 0
+                }}
+              />
+              <SparklesText
+                sparklesCount={14}
+                className="relative z-10 text-xl sm:text-2xl md:text-6xl text-white special-cursive px-8 py-6"
+              >
+                Launch Countdown
+              </SparklesText>
+            </div>
             <p className="text-lg text-gray-500 mb-2 max-w-2xl mx-auto animate-fade-in-delayed-2">
               July 01, 2025 6 PM IST
             </p>
@@ -301,7 +310,7 @@ const Index = () => {
 
           {/* GitHub Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <Card className="bg-white/70 backdrop-blur-sm border-[#EAB30880] py-4 md:py-0 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-white/40 backdrop-blur-lg border-[#EAB30880]/50 py-4 md:py-0 hover:shadow-sm transition-all duration-300 glassy-card">
               <CardContent className="p-6 text-center">
                 <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
@@ -311,7 +320,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-[#A855F766] py-4 md:py-0 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-white/40 backdrop-blur-lg border-[#A855F766]/50 py-4 md:py-0 hover:shadow-sm transition-all duration-300 glassy-card">
               <CardContent className="p-6 text-center">
                 <GitFork className="h-8 w-8 text-purple-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
@@ -321,7 +330,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-indigo-300 py-4 md:py-0 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-white/40 backdrop-blur-lg border-indigo-300/50 py-4 md:py-0 hover:shadow-sm transition-all duration-300 glassy-card">
               <CardContent className="p-6 text-center">
                 <Download className="h-8 w-8 text-indigo-500 mx-auto mb-2" />
                 <div className="text-3xl font-bold text-gray-800">
@@ -331,6 +340,15 @@ const Index = () => {
               </CardContent>
             </Card>
           </div>
+          <style jsx>{`
+            .glassy-card {
+              background: rgba(255,255,255,0.35);
+              box-shadow: 0 4px 8px 0 rgba(31, 38, 135, 0.18);
+              backdrop-filter: blur(16px);
+              -webkit-backdrop-filter: blur(16px);
+              border-radius: 1.5rem;
+            }
+          `}</style>
         </div>
       </section>
 
