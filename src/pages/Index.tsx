@@ -252,20 +252,21 @@ const Index = () => {
           </div>
         </div>
       </section>
-      <div className="overflow-hidden dark:bg-[#0B0B0F] bg-white w-full">
+      <div className="overflow-hidden dark:bg-[#0B0B0F] bg-transparent w-full">
       <MacbookScroll
-        // title={
-        //   <span>
-        //     This Macbook is built with Tailwindcss. <br /> No kidding.
-        //   </span>
-        // }
-        // badge={
-        //   <a href="https://peerlist.io/manuarora">
-        //     <Badge className="h-10 w-10 transform -rotate-12" />
-        //   </a>
-        // }
+        title={
+          <span>
+            Experience VibeLayer in action - your desktop. <br/> Reimagined with floating companions.
+          </span>
+        }
+        badge={
+          <a href="https://peerlist.io/manuarora">
+            {/* <Badge className="h-10 w-10 transform -rotate-12" /> */}
+            <img src="/icon.png" alt="Badge" className="h-10 w-10" />
+          </a>
+        }
         src={`/preview1.webp`}
-        showGradient={true}
+        showGradient={false}
       />
     </div>
 
