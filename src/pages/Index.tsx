@@ -343,7 +343,7 @@ const Index = () => {
           <style jsx>{`
             .glassy-card {
               background: rgba(255,255,255,0.35);
-              box-shadow: 0 4px 8px 0 rgba(31, 38, 135, 0.18);
+              box-shadow: 0 2px 4px 0 rgba(31, 38, 135, 0.18);
               backdrop-filter: blur(16px);
               -webkit-backdrop-filter: blur(16px);
               border-radius: 1.5rem;
