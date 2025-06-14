@@ -1,73 +1,68 @@
-# Welcome to your Lovable project
+# 🌟 VibeLayer Waitlist Website
 
-## Project info
+This is the official **waitlist and launch website** for **VibeLayer** — your adorable desktop companion! 🐾
+Check out the actual app here: https://github.com/mohit-nagaraj/VibeLayer
 
-**URL**: https://lovable.dev/projects/e628b4c3-3e5c-482c-9546-8347635aec3e
+## ✨ About the App: VibeLayer
 
-## How can I edit this code?
+VibeLayer isn't just another app — it's your always-on-top, see-through **sticker buddy** for your desktop! Overlay cute, quirky, or motivational stickers (with transparent backgrounds!) right onto your screen. Make your workspace fun, personal, and just a little bit magical. ✨
 
-There are several ways of editing your application.
+### 🎉 Why People Love VibeLayer
 
-**Use Lovable**
+- 🖼️ **Transparent Stickers**  
+  Stickers float on your screen — always on top, always adorable.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e628b4c3-3e5c-482c-9546-8347635aec3e) and start prompting.
+- 🌐 **Import from Anywhere**  
+  - Local files (drag & drop!)  
+  - Image URLs  
+  - Online search via **Giphy** and **Unsplash**
 
-Changes made via Lovable will be committed automatically to this repo.
+- 🪄 **Magic Background Removal**  
+  One click = no background (powered by Imgly AI)
 
-**Use your preferred IDE**
+- 🦄 **Layout Freedom**  
+  Drag, resize, and position however you want — VibeLayer remembers your style.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- ⚙️ **Customizable Settings**  
+  Auto-start, dark/light themes, hide sticker capture & more.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- 💻 **Cross-Platform**  
+  Windows, macOS, and Linux — everyone gets to vibe!
 
-Follow these steps:
+- 🔒 **Privacy-First**  
+  All sticker data is saved **locally**. No cloud, no tracking.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🚀 About This Repository
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+This repository contains the **waitlist landing page** for VibeLayer. It's a simple and sleek site where early users can sign up and get notified when the app launches.
 
-# Step 3: Install the necessary dependencies.
-npm i
+**This is *not* the main app repository.**  
+Think of this as the welcome mat before entering the real party.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 🛠️ Tech Stack
+
+- React + Vite
+- Tailwind CSS
+- Hosted via GitHub Pages / Vercel / Netlify (optional to mention if deployed)
+
+## 📦 Setup Instructions (for Devs)
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+### 🤝 Contributing
+Wanna improve the site?
+Feel free to fork, work your magic, and open a pull request!
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 💌 Join the Vibe
+Visit the live site, drop your email, and get ready to vibe your desktop like never before.
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/e628b4c3-3e5c-482c-9546-8347635aec3e) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Because productivity doesn't have to be boring. ✨
