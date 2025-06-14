@@ -374,13 +374,13 @@ const Index = () => {
       {/* <Separator className="my-12 w-full max-w-6xl mx-auto bg-gradient-to-r from-purple-600 to-pink-600 opacity-10 h-[2px]"/> */}
 
       {/* Waitlist Section */}
-      <section id='waitlist' className="flex py-12 mt-24 mb-48 items-center justify-center px-4 relative z-20 overflow-hidden">
+      <section id='waitlist' className="flex py-12 mt-24 mb-24 md:mb-48 items-center justify-center px-4 relative z-20 overflow-hidden">
         <BackgroundLines className="flex items-center justify-center w-full flex-col px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <h1 className="text-6xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+            <h1 className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
               Join the Waitlist
             </h1>
-            <p className="text-xl text-gray-600 mb-12">
+            <p className="text-sm md:text-xl text-gray-600 mb-12">
               Be the first to know when Vibelayer launches and get exclusive early access!
             </p>
             {!isSubmitted ? (
@@ -392,7 +392,7 @@ const Index = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="flex-1 p-6 text-lg border-purple-200 focus:border-purple-400 focus:shadow-md rounded-full"
+                    className="flex-1 p-3 md:p-6 text-lg border-purple-200 focus:border-purple-400 focus:shadow-md rounded-full"
                     disabled={isSubmitting}
                   />
                   <ConfettiButton type="submit"
@@ -419,15 +419,15 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors duration-300"
               >
-                <Github className="h-6 w-6" />
-                <span className="text-lg">View on GitHub</span>
+                <Github className="h-4 w-4 md:h-6 md:w-6" />
+                <span className="text-sm md:text-lg">View on GitHub</span>
               </a>
             </div>
           </div>
         </BackgroundLines>
       </section>
 
-      <section className="mt-24 flex items-center justify-center px-4 relative z-20">
+      <section className="mt-12 md:mt-24 flex items-center justify-center px-4 relative z-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <HyperText
